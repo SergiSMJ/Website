@@ -1,0 +1,386 @@
+@import '_includes/_general';
+@import '_includes/_fonts';
+@import '_includes/_vars';
+@import '_includes/_mixins';
+@import '_includes/_timeline';
+@import '_includes/_last_tweets';
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-family: $general-font;
+    font-weight: 400;
+    background: #212121;
+    color: white;
+    line-height: 1.4rem;
+    overflow-x: hidden;
+}
+
+footer{
+  height: 100px;
+  background: white;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: $color-1;
+  .logo-footer{
+    width: 80px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    top: 10px;
+  }
+  h3{
+    color: $color-1;
+    @include bp-mobile {
+      font-size: 1rem;
+    }
+  }
+}
+
+section{
+	padding-left: 2rem !important;
+	padding-right: 2rem !important;
+	padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color:$dark-blue;
+    &:focus, &:hover{
+        color: #93AABF;
+        text-decoration: none;
+    }
+}
+
+h2 {
+  font-size: 3rem;
+  font-family: $secondary-general-font;
+  @include bp-mobile {
+    font-size: 1.8rem;
+  }
+}
+
+h3 {
+    color: $brown-gold;
+    font-family: $secondary-general-font;
+    font-weight: 500;
+}
+p{
+  @include bp-mobile {
+    font-size: 1rem;
+  }
+}
+
+b {
+    color: white;
+    font-weight: bold;
+}
+
+.about-me {
+    padding-top: 3rem;
+    text-align: center;
+    background: #263238;
+    h3{
+      margin-bottom: 1rem;
+    }
+    .skills{
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+}
+
+.about-me p {
+    font-weight: 300;
+}
+
+#myNetworks {
+  svg {
+    fill: $color-1;
+  }
+}
+
+.timeline-title {
+  h3{
+    color: white;
+    text-align: center;
+  }
+}
+.studies{
+  @extend .timeline-title;
+}
+
+.closing-section {
+    margin-top: 2rem;
+    padding-bottom:3rem;
+    text-align: center;
+    h3{
+      margin-bottom: 1rem;
+    }
+}
+
+p>code {
+    background: $white;
+    padding: 0 5px 2px;
+    border-radius: 4px;
+    position: relative;
+    top: -1px;
+    margin: 0 3px 0 1px;
+    font-size: 90%;
+    font-family: monospace;
+}
+
+.logo{
+    display: block;
+}
+
+.icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  fill: #ffffff;
+}
+
+.icon-circle{
+  width: 60px;
+  height: 60px;
+  position: relative;
+  margin: 0px auto;
+  display: inline-block;
+}
+
+.circle {
+	width: 100px;
+	height: 100px;
+	background: $white;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  margin:10px;
+  padding: 1rem;
+  display: inline-block;
+  &:hover{
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+    transition:all 0.3s ease;
+  }
+}
+
+.html5{
+ background: #e67e22;
+}
+.css3{
+  background: #3498db;
+}
+.sass{
+  background: white;
+  padding-left: 1.3rem;
+}
+.javascript{
+  background: #f7df1e;
+}
+.js-icon{
+  top: -10px;
+  left: -5px;
+}
+
+.gulp{
+  background: #D64541;
+}
+/* Padding for spacing */
+.inner {
+  padding: 10px;
+}
+
+/*
+ * Header
+ */
+.masthead-brand {
+  float:left;
+  img{
+    width: 80px;
+    height: 40px;
+  }
+  @media (min-width: 768px) {
+    float: left;
+  }
+}
+
+.masthead{
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    background-color: $header-color;
+    border-bottom: 1px solid;
+    border-color: $header-color;
+    transition:all 0.4s ease;
+    z-index: 99;
+    @media (min-width: 768px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    }
+}
+
+.masthead-nav {
+    float: right;
+    padding-right: 2rem;
+    @media (min-width: 768px) {
+        float: right;
+    }
+}
+
+.masthead-nav{
+    >li{
+        display: inline-block;
+        + li{
+            margin-left: 20px;
+        }
+
+        >a{
+            padding-right: 0;
+            padding-left: 0;
+            font-size: 16px;
+            font-weight: bolder;
+            color: #8A6D3B; /* IE8 proofing */
+            color: rgb(161, 139, 116);
+            border-bottom: 2px solid transparent;
+            &:hover, &:focus{
+                background-color: transparent;
+                border-bottom-color: #a9a9a9;
+                border-bottom-color: rgba(255,255,255,.25);
+            }
+        }
+    }
+    .active{
+        >a{
+            color: #969696;
+            border-bottom-color: #969696;
+            &:hover, &:focus{
+                color: #fff;
+                border-bottom-color: #fff;
+            }
+        }
+    }
+}
+
+.nav-scrolled{
+    background-color: $nav-bg-scrolled;
+    transition:all 0.4s ease;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: $primary-bg-color;
+    color: $color-1;
+    font-weight: 200;
+    background: url(../files/img/sergi_smj.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    .title-hero {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+        line-height: 3.5rem;
+        font-weight: 200;
+        @include bp-mobile {
+          margin-top: 2rem;
+          font-size: 3rem;
+        }
+
+        .subtitle {
+            font-family: $secondary-general-font;
+            b {
+              color: $color-1;
+            }
+        }
+    }
+
+    .text-hero {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        padding: 0 2rem;
+        text-align: center;
+    }
+
+    .link-hero{
+        color: #d50000;
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        padding: 0 2rem;
+        text-align: center;
+        &:focus, &:hover{
+            color: #ff1744;
+            text-decoration: none;
+        }
+    }
+}
+
+.wrap {
+    max-width: 1200px;
+    margin: 0px auto;
+}
+
+.starterkit {
+    display: flex;
+    flex-direction: column
+}
+
+.button {
+    position: relative;
+    display: block;
+    min-width: 11rem;
+    margin: 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    color: $primary-bg-color;
+    background: $white;
+    font-size: 1.25rem;
+    transition: color, .15s
+}
+
+.button:hover {
+    color: $light-blue;
+    background: $white;
+    border-color: $white
+}
+
+.hideElement{
+    display: none;
+}
+
+@include bp-mobile {
+    .download,
+    .fork {
+        display: none;
+    }
+        .masthead-nav{
+        >li{
+            >a{
+                color: #000; /* IE8 proofing */
+                color: black;
+                border-bottom: 2px solid transparent;
+                &:hover, &:focus{
+                    background-color: transparent;
+                    border-bottom-color: #a9a9a9;
+                    border-bottom-color: rgba(255,255,255,.25);
+                }
+            }
+        }
+    }
+}
+
+@include mobile-aspect {
+    .title-hero {
+        font-size:60px!important;
+    }
+}

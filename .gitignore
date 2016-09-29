@@ -1,3 +1,4 @@
 node_modules/
+src/templates/css
 .DS_Store
 *.log

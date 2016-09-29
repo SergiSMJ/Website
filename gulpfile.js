@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     uncss = require('gulp-uncss'),
     autoprefixer = require('gulp-autoprefixer'),
     uglify = require('gulp-uglify'),
-    ftp = require('vinyl-ftp'),
+    ghPages = require('gulp-gh-pages'),
     cssimport = require('gulp-cssimport'),
     beautify = require('gulp-beautify'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -63,13 +63,6 @@ var routes = {
         baseDirFiles: baseDirs.dist+'**',
         ftpUploadDir: 'FTP-DIRECTORY'
     }
-};
-/* ftpCredentials: info used to deploy @ ftp server */
-
-var ftpCredentials = {
-    host: '',
-    user: '',
-    password: ''
 };
 
 /* Compiling Tasks */
@@ -151,29 +144,12 @@ gulp.task('images', function() {
         .pipe(gulp.dest(routes.files.imgmin));
 });
 
-/* Deploy, deploy dist/ files to an ftp server */
+//Deploy to github pages
 
-gulp.task('ftp', function() {
-    var connection = ftp.create({
-        host: ftpCredentials.host,
-        user: ftpCredentials.user,
-        password: ftpCredentials.password
-    });
-
-    return gulp.src(routes.deployDirs.baseDirFiles, {
-        base: routes.deployDirs.baseDir,
-        buffer: false
-    })
-        .pipe(plumber({
-            errorHandler: notify.onError({
-                title: "Error: Deploy failed.",
-                message:"<%= error.message %>"
-            })
-        }))
-        .pipe(connection.dest(routes.deployDirs.ftpUploadDir))
-        .pipe(notify({
-            title: 'Deploy succesful!',
-            message: 'Your deploy has been done!.'
+gulp.task('gh-pages', function() {
+    return gulp.src(routes.deployDirs.baseDirFiles)
+        .pipe(ghPages({
+            message: 'Yo! Updating and pushing [timestap]'
         }));
 });
 
@@ -278,7 +254,7 @@ gulp.task('build', ['templates', 'styles', 'scripts', 'images']);
 
 gulp.task('optimize', ['uncss', 'critical', 'images']);
 
-gulp.task('deploy', ['optimize', 'ftp']);
+gulp.task('deploy', ['optimize',  'gh-pages']);
 
 gulp.task('default', function() {
     gulp.start('dev');

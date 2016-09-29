@@ -20,7 +20,8 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     critical = require('critical').stream,
     svgIcons = require('gulp-svg-icons'),
-    icons = new svgIcons('src/icons');
+    icons = new svgIcons('src/icons'),
+    inlinesource = require('gulp-inline-source');
 
 //* baseDirs: baseDirs for the project */
 
@@ -243,6 +244,18 @@ gulp.task('icons', function() {
 gulp.task('inject', ['icons'], function() {
     return gulp.src('src/templates/index.html')
         .pipe(icons.inject())
+        .pipe(gulp.dest(routes.files.html));
+});
+
+gulp.task('inlinesource', function () {
+    return gulp.src(routes.templates.html)
+        .pipe(inlinesource())
+        .pipe(minifyHTML({
+            empty:true,
+            quotes:true,
+            cdata:true,
+            conditionals:true
+        }))
         .pipe(gulp.dest(routes.files.html));
 });
 

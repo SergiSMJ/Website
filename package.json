@@ -4,7 +4,7 @@
   "description": "Sergi Mulà Personal Webpage",
   "license": "",
   "main": "",
-  "repository":"Sergi_SMJ-Webpage",
+  "repository": "Sergi_SMJ-Webpage",
   "author": {
     "name": "Sergi Mulà",
     "email": "sergi.serch@gmail.com",
@@ -36,14 +36,16 @@
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass":"^2.3.1",
+    "gulp-sass": "^2.3.1",
     "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-uglify": "^1.5.3",
     "gulp-uncss": "^1.0.5",
     "bootstrap": "^3.3.6",
-	  "gulp-gh-pages": "^0.5.4"
+    "gulp-gh-pages": "^0.5.4"
   },
   "devDependencies": {
+    "gulp-inline-source": "^3.0.0",
+    "gulp-replace": "^0.5.4",
     "mocha": "*"
   }
 }

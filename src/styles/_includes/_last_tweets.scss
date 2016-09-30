@@ -49,20 +49,20 @@
     }
     .twitter_reply_icon{
       @extend .icon-buttons;
-      background: url(../files/icons/reply-tweet.svg) no-repeat 50% 50%;
+      background: url(files/icons/reply-tweet.svg) no-repeat 50% 50%;
       background-size: cover;
       margin-left: 0;
     }
 
     .twitter_retweet_icon{
       @extend .icon-buttons;
-      background: url(../files/icons/retweet.svg) no-repeat 50% 50%;
+      background: url(files/icons/retweet.svg) no-repeat 50% 50%;
       background-size: cover;
     }
 
     .twitter_fav_icon{
       @extend .icon-buttons;
-      background: url(../files/icons/heart.svg) no-repeat 50% 50%;
+      background: url(files/icons/heart.svg) no-repeat 50% 50%;
       background-size: cover;
     }
   }

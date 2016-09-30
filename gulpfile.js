@@ -72,6 +72,7 @@ var routes = {
 
 gulp.task('templates', function() {
     return gulp.src(routes.templates.html)
+        .pipe(inlinesource())
         .pipe(minifyHTML({
             empty:true,
             quotes:true,
@@ -187,6 +188,45 @@ gulp.task('serve', function() {
 
 /* Optimize your project */
 
+gulp.task('clean-styles', function() {
+    return gulp.src(routes.styles.scss)
+        .pipe(plumber({
+            errorHandler: notify.onError({
+                title: "Error: Compiling SCSS.",
+                message:"<%= error.message %>"
+            })
+        }))
+          .pipe(sass({
+              outputStyle: 'compressed'
+          }))
+        .pipe(cssimport({}))
+        .pipe(rename('style.css'))
+        .pipe(gulp.dest(routes.styles.css))
+        .pipe(notify({
+            title: 'SCSS Compiled and Minified succesfully!',
+            message: 'scss task completed.',
+            onLast: true
+        }));
+});
+
+gulp.task('clean-scripts', function() {
+    return gulp.src(routes.scripts.js)
+        .pipe(plumber({
+            errorHandler: notify.onError({
+                title: "Error: Babel and Concat failed.",
+                message:"<%= error.message %>"
+            })
+        }))
+        .pipe(concat('script.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(routes.scripts.jsmin))
+        .pipe(notify({
+            title: 'JavaScript Minified and Concatenated!',
+            message: 'your js files has been minified and concatenated.',
+            onLast: true
+        }));
+});
+
 gulp.task('uncss', function() {
     return gulp.src(routes.files.cssFiles)
         .pipe(uncss({
@@ -204,33 +244,6 @@ gulp.task('uncss', function() {
         .pipe(notify({
             title: 'Project Optimized!',
             message: 'UnCSS completed!',
-            onLast: true
-        }));
-});
-
-/* Extract CSS critical-path */
-
-gulp.task('critical', function () {
-    return gulp.src(routes.files.htmlFiles)
-        .pipe(critical({
-            base: baseDirs.dist,
-            inline: true,
-            html: routes.files.htmlFiles,
-            css: routes.files.styleCss,
-            ignore: ['@font-face',/url\(/],
-            width: 1300,
-            height: 900
-        }))
-        .pipe(plumber({
-            errorHandler: notify.onError({
-                title: "Error: Critical failed.",
-                message:"<%= error.message %>"
-            })
-        }))
-        .pipe(gulp.dest(baseDirs.dist))
-        .pipe(notify({
-            title: 'Critical Path completed!',
-            message: 'css critical path done!',
             onLast: true
         }));
 });
@@ -265,9 +278,9 @@ gulp.task('dev', ['templates', 'styles', 'scripts',  'images', 'serve']);
 
 gulp.task('build', ['templates', 'styles', 'scripts', 'images']);
 
-gulp.task('optimize', ['uncss', 'critical', 'images']);
+gulp.task('optimize', ['clean-styles', 'clean-scripts', 'images']);
 
-gulp.task('deploy', ['optimize',  'gh-pages']);
+gulp.task('deploy', ['optimize', 'templates', 'gh-pages']);
 
 gulp.task('default', function() {
     gulp.start('dev');

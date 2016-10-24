@@ -21,7 +21,8 @@ var gulp = require('gulp'),
     critical = require('critical').stream,
     svgIcons = require('gulp-svg-icons'),
     icons = new svgIcons('src/icons'),
-    inlinesource = require('gulp-inline-source');
+    inlinesource = require('gulp-inline-source')
+    changed = require('gulp-changed');
 
 //* baseDirs: baseDirs for the project */
 
@@ -98,6 +99,7 @@ gulp.task('styles', function() {
                 message:"<%= error.message %>"
             })
         }))
+        .pipe(changed(routes.styles.css))
         .pipe(sourcemaps.init())
             .pipe(sass({
                 outputStyle: 'compressed'
@@ -125,6 +127,7 @@ gulp.task('scripts', function() {
                 message:"<%= error.message %>"
             })
         }))
+        .pipe(changed(routes.scripts.jsmin))
         .pipe(sourcemaps.init())
             .pipe(concat('script.js'))
             .pipe(uglify())
@@ -196,6 +199,7 @@ gulp.task('clean-styles', function() {
                 message:"<%= error.message %>"
             })
         }))
+        .pipe(changed(routes.styles.css))
           .pipe(sass({
               outputStyle: 'compressed'
           }))
@@ -217,6 +221,7 @@ gulp.task('clean-scripts', function() {
                 message:"<%= error.message %>"
             })
         }))
+        .pipe(changed(routes.scripts.jsmin))
         .pipe(concat('script.js'))
         .pipe(uglify())
         .pipe(gulp.dest(routes.scripts.jsmin))
